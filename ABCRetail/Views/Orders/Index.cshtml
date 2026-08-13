@@ -1,0 +1,65 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "Order Processing";
+}
+
+<h2>Order Processing Queue</h2>
+
+<form asp-action="AddMessage" method="post" class="mb-4">
+
+    <div class="mb-3">
+        <label class="form-label">Order / Inventory Message</label>
+
+        <input type="text"
+               name="message"
+               class="form-control"
+               placeholder="Enter order or inventory message"
+               required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Add to Queue
+    </button>
+
+</form>
+
+<h4>Queue Messages</h4>
+
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @if (Model != null && Model.Count > 0)
+        {
+            int number = 1;
+
+            foreach (var message in Model)
+            {
+                <tr>
+                    <td>@number</td>
+                    <td>@message</td>
+                </tr>
+
+                number++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="2">
+                    No queue messages available.
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
